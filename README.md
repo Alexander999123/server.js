@@ -1,7 +1,6 @@
-# Первый урок курса - "js продвинутый"
+# Server.js
 
-*first 
-*second
+*url: http://localhost:3000
 
 
 
