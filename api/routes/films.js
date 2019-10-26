@@ -4,6 +4,7 @@ const fs = require('fs');
 const dataFilms = require('../../InfoFilms.json');
 var app = express();
 var bodyParser = require('body-parser');
+let pathToFile = "resources/InfoFilms.json"
 
 let movieList = new MovieList();
 movieList.setMovieList(dataFilms.list);
@@ -28,7 +29,7 @@ app.post('/edit', (req, res) => {
         if(!r.result)
             resolve(r.data);
 
-        fs.open('InfoFilms.json', 'w', 0644, (err, file_handle)=>{
+        fs.open(pathToFile, 'w', 0644, (err, file_handle)=>{
             if(!err){
                 fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
                     if(!err){
@@ -57,7 +58,7 @@ app.post('/delete', (req, res) => {
         if(!r.result)
             resolve(r.data);
 
-        fs.open('InfoFilms.json', 'w', 0644, (err, file_handle)=>{
+        fs.open(pathToFile, 'w', 0644, (err, file_handle)=>{
             if(!err){
                 fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
                     if(!err){
@@ -83,7 +84,7 @@ app.post('/add', (req, res) => {
     movieList.addMovie(Movie);
  
     let prom = new Promise((resolve) => {
-        fs.open('InfoFilms.json', 'w', 0644, (err, file_handle)=>{
+        fs.open(pathToFile, 'w', 0644, (err, file_handle)=>{
             if(!err){
                 fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
                     if(!err){
