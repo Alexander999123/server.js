@@ -35,10 +35,9 @@ app.post('/edit', (req, res) => {
     })
 })
 
-
 app.post('/delete', (req, res) => {
     let ID = req.body.id;
-    let r = movieList.deleteMovi(ID)
+    let r = movieList.deleteMovie(ID)
 
     if(!r.result){
         res.send(r.data);

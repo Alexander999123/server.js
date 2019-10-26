@@ -35,7 +35,7 @@ MovieList.prototype.findMovie = function (index) {
     return this.list.find(x=>x.ID === index);
 }
 
-MovieList.prototype.deleteMovi = function (index) {
+MovieList.prototype.deleteMovie = function (index) {
    let indexDel = this.list.findIndex(x=>x.ID === index);
    if(indexDel !== -1){
         this.list.splice(indexDel,1);
