@@ -24,7 +24,7 @@ app.post('/edit', (req, res) => {
     let options = req.body.options;
     let r = movieList.edit(ID, options)
     
-    let prom = new Promise((resolve, reject) => {
+    let prom = new Promise((resolve) => {
         if(!r.result)
             resolve(r.data);
 
@@ -53,7 +53,7 @@ app.post('/edit', (req, res) => {
 app.post('/delete', (req, res) => {
     let ID = req.body.id;
     let r = movieList.deleteMovi(ID)
-    let prom = new Promise((resolve, reject) => {
+    let prom = new Promise((resolve) => {
         if(!r.result)
             resolve(r.data);
 
@@ -82,7 +82,7 @@ app.post('/add', (req, res) => {
     let Movie = req.body.Movie;
     movieList.addMovie(Movie);
  
-    let prom = new Promise((resolve, reject) => {
+    let prom = new Promise((resolve) => {
         fs.open('InfoFilms.json', 'w', 0644, (err, file_handle)=>{
             if(!err){
                 fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
