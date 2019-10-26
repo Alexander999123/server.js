@@ -24,27 +24,12 @@ app.post('/edit', (req, res) => {
     let ID = req.body.id;
     let options = req.body.options;
     let r = movieList.edit(ID, options)
-    
-    let prom = new Promise((resolve) => {
-        if(!r.result)
-            resolve(r.data);
 
-        fs.open(pathToFile, 'w', 0644, (err, file_handle)=>{
-            if(!err){
-                fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
-                    if(!err){
-                        resolve('Edit successfully');
-                    } else {
-                        console.log('error:', err);                       
-                        resolve(err);
-                    }
-                })
-            } else {
-                console.log('error:', err);
-                resolve(err);
-            }
-        });
-    }).then(data => {
+    if(!r.result){
+        res.send(r.data);
+    }
+
+    writeFile().then(data=>{
         res.set("Access-Control-Allow-Origin", "*");
         res.send(data)
     })
@@ -54,41 +39,34 @@ app.post('/edit', (req, res) => {
 app.post('/delete', (req, res) => {
     let ID = req.body.id;
     let r = movieList.deleteMovi(ID)
-    let prom = new Promise((resolve) => {
-        if(!r.result)
-            resolve(r.data);
 
-        fs.open(pathToFile, 'w', 0644, (err, file_handle)=>{
-            if(!err){
-                fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
-                    if(!err){
-                        resolve('Delete successfully');
-                    } else {
-                        console.log('error:', err);                       
-                        resolve(err);
-                    }
-                })
-            } else {
-                console.log('error:', err);
-                resolve(err);
-            }
-        });
-    }).then(data=>{
+    if(!r.result){
+        res.send(r.data);
+    }
+       
+    writeFile().then(data=>{
         res.set("Access-Control-Allow-Origin", "*");
         res.send(data)
-    }) 
+    })
 })
 
 app.post('/add', (req, res) => {
     let Movie = req.body.Movie;
     movieList.addMovie(Movie);
- 
+    
+    writeFile().then(data=>{
+        res.set("Access-Control-Allow-Origin", "*");
+        res.send(data)
+    })
+})
+
+function writeFile() {
     let prom = new Promise((resolve) => {
         fs.open(pathToFile, 'w', 0644, (err, file_handle)=>{
             if(!err){
                 fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
                     if(!err){
-                        resolve('Add successfully');
+                        resolve('Successfully');
                     } else {
                         console.log('error:', err);                       
                         resolve(err);
@@ -99,11 +77,9 @@ app.post('/add', (req, res) => {
                 resolve(err);
             }
         });
-    }).then(data => {
-        res.set("Access-Control-Allow-Origin", "*");
-        res.send(data)
     })
-})
+    return prom;
+}
 
 module.exports = app;
 
