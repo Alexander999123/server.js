@@ -27,7 +27,6 @@ MovieList.prototype.setMovieList = function (listMove) {
 MovieList.prototype.addMovie = function (movie){
     if(movie instanceof Array){
         this.setMovieList(movie)
-        return {result:false, data:"film is not defined"}
     }
     this.list.push(new Movie(movie));
 }

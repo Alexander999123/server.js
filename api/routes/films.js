@@ -75,17 +75,14 @@ app.post('/delete', (req, res) => {
     }).then(data=>{
         res.set("Access-Control-Allow-Origin", "*");
         res.send(data)
-    })
+    }) 
 })
 
 app.post('/add', (req, res) => {
     let Movie = req.body.Movie;
-    let r = movieList.addMovie(Movie);
+    movieList.addMovie(Movie);
  
     let prom = new Promise((resolve, reject) => {
-        if(!r.result)
-            resolve(r.data);
-
         fs.open('InfoFilms.json', 'w', 0644, (err, file_handle)=>{
             if(!err){
                 fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
