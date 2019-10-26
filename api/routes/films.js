@@ -1,19 +1,86 @@
 const MovieList = require('../../models/movie');
 const express = require('express');
-const films = express.Router();
-const dataFilms = require('../../resources/InfoFilms.json');
+const fs = require('fs');
+const dataFilms = require('../../InfoFilms.json');
+var app = express();
+var bodyParser = require('body-parser');
 
-films.get('/', (req, res, next)=>{       
-    let movieList = new MovieList();
-    movieList.setMovieList(dataFilms);
-    //let oneFilm = movieList.findMovie("HO00000199")
+let movieList = new MovieList();
+movieList.setMovieList(dataFilms.list);
 
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
+app.get('/', (req, res, next)=>{       
     res.set("Access-Control-Allow-Origin", "*");
-     res.status(200).json(movieList);
-    // res.status(200).json(movieList);
+    res.status(200).json(movieList);
 });
 
-module.exports = films;
+app.post('/edit', (req, res) => {
+    let ID = req.body.id;
+    let options = req.body.options;
+    movieList.edit(ID, options)
+ 
+    fs.open('InfoFilms.json', 'w', 0644, (err, file_handle)=>{
+        if(!err){
+            fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
+                if(!err){
+                    console.log('write successfully');
+                } else {
+                    console.log('error:', err);
+                    erorr = err;
+                    isError = true;
+                }
+            })
+        } else {
+            console.log('error:', err);
+            error = err;
+            isError = true;
+        }
+    })
+  
+    // let sendBody = {
+    //     code: "0",
+    //     data: movieList.findMovie(ID)
+    // }
+
+    res.set("Access-Control-Allow-Origin", "*");
+    res.send("Edit is successfully",)
+})
+
+
+app.post('/delete', (req, res) => {
+    let ID = req.body.id;
+    movieList.deleteMovi(ID)
+ 
+    fs.open('InfoFilms.json', 'w', 0644, (err, file_handle)=>{
+        if(!err){
+            fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
+                if(!err){
+                    console.log('write successfully');
+                } else {
+                    console.log('error:', err);
+                    erorr = err;
+                    isError = true;
+                }
+            })
+        } else {
+            console.log('error:', err);
+            error = err;
+            isError = true;
+        }
+    })
+
+    res.set("Access-Control-Allow-Origin", "*");
+    res.send("Delete is successfully",)
+})
+
+
+
+
+module.exports = app;
 
 // console.log("set:", movieList);
 

@@ -8,7 +8,7 @@ function Movie (options){
     this.TitleAlt = options.TitleAlt;
     this.GenreId = options.GenreId;
     this.Actors = [];
-    this.RatingCount =  options.CustomerRatingTrailerStatistics.RatingCount;
+    this.RatingCount =  options.RatingCount;
 }
 
 function MovieList (){
