@@ -27,7 +27,7 @@ app.post('/edit', (req, res) => {
         if(!err){
             fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
                 if(!err){
-                    console.log('write successfully');
+                    console.log('Edit successfully');
                 } else {
                     console.log('error:', err);
                     erorr = err;
@@ -40,11 +40,6 @@ app.post('/edit', (req, res) => {
             isError = true;
         }
     })
-  
-    // let sendBody = {
-    //     code: "0",
-    //     data: movieList.findMovie(ID)
-    // }
 
     res.set("Access-Control-Allow-Origin", "*");
     res.send("Edit is successfully",)
@@ -59,7 +54,7 @@ app.post('/delete', (req, res) => {
         if(!err){
             fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
                 if(!err){
-                    console.log('write successfully');
+                    console.log('Delete successfully');
                 } else {
                     console.log('error:', err);
                     erorr = err;
@@ -71,14 +66,37 @@ app.post('/delete', (req, res) => {
             error = err;
             isError = true;
         }
-    })
+    });
 
     res.set("Access-Control-Allow-Origin", "*");
     res.send("Delete is successfully",)
 })
 
+app.post('/add', (req, res) => {
+    let Movie = req.body.Movie;
+    movieList.addMovie(Movie);
+ 
+    fs.open('InfoFilms.json', 'w', 0644, (err, file_handle)=>{
+        if(!err){
+            fs.write(file_handle, JSON.stringify(movieList), null, 'utf8',(err, written)=>{
+                if(!err){
+                    console.log('Add successfully');
+                } else {
+                    console.log('error:', err);
+                    erorr = err;
+                    isError = true;
+                }
+            })
+        } else {
+            console.log('error:', err);
+            error = err;
+            isError = true;
+        }
+    });
 
-
+    res.set("Access-Control-Allow-Origin", "*");
+    res.send("Add is successfully",)
+})
 
 module.exports = app;
 
