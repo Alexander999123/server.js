@@ -27,7 +27,7 @@ MovieList.prototype.setMovieList = function (listMove) {
 MovieList.prototype.addMovie = function (movie){
     if(movie instanceof Array){
         this.setMovieList(movie)
-        return;
+        return {result:false, data:"film is not defined"}
     }
     this.list.push(new Movie(movie));
 }
@@ -40,14 +40,22 @@ MovieList.prototype.deleteMovi = function (index) {
    let indexDel = this.list.findIndex(x=>x.ID === index);
    if(indexDel !== -1){
         this.list.splice(indexDel,1);
+        return {result:true, data: "films id deleted"}
+   }
+   else {
+       return {result:false, data:"film is not defined"}
    }
 }
 
 MovieList.prototype.edit = function (index, options) {
     let item = this.findMovie(index);
+    if(!item){
+        return {result:false, data:"film is not defined"}
+    }
     for(var key in options){
         item[key] = options[key];
     }
+    return {result:true, data:"film is edit"}
 }
 
 module.exports = MovieList;
