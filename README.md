@@ -16,7 +16,7 @@
 		 body: {"id"}
 *4) GetByOptions
 		 URL: http://localhost:3000/films/getByOptions
-		 body: {"options":{"Genred":"", "Actors":""/[]}}
+		 body: {"options":{"Genred":""/[], "Actors":""/[]}}
 
 # Models and methods 
 	*1) Movie: 
