@@ -7,8 +7,10 @@ function Movie (options){
     this.OpeningDate = options.OpeningDate;
     this.TitleAlt = options.TitleAlt;
     this.GenreId = options.GenreId;
-    this.Actors = [];
+    this.Actors = options.Actors;
+    this.Genred = options.Genred;
     this.RatingCount =  options.RatingCount;
+    this.srcImage = "";
 }
 
 function MovieList (){
@@ -55,6 +57,40 @@ MovieList.prototype.edit = function (index, options) {
         item[key] = options[key];
     }
     return {result:true, data:"film is edit"}
+}
+
+MovieList.prototype.findByOtions = function(options){
+    let tempList = [];
+
+        for (let index = 0; index < this.list.length; index++) {
+        let film = this.list[index];
+        let addInTemp;
+        // let hasActors = false;
+
+            for (let op in options) {
+                addInTemp = true;
+                // if(op.toLowerCase() === "actors"){
+                if(typeof film[op] === 'undefined'){
+                    addInTemp = false;
+                    continue;
+                }
+
+                if(options[op] instanceof Array && options[op].length > 0) {
+                    for (let x = 0; x < options[op].length; x++) {
+                        if(film[op].includes(options[op][x])) { addInTemp = true; break }
+                        else { addInTemp = false }   
+                    }
+                } else {
+                    if(film[op] instanceof Array && film[op].includes(options[op])) { addInTemp = true; }
+                    else if(film[op] !== options[op]) { addInTemp = false; }
+                }    
+                
+                if(addInTemp) { tempList.push(film); } 
+            }
+
+        }
+
+    return tempList;
 }
 
 module.exports = MovieList;
