@@ -30,7 +30,7 @@
 					"TitleAlt": "A Score to Settle",
 					"GenreId": "0000000008",
 					"Actors": [],
-					**"Genred": "Триллер", // genred**
+			---->	"Genred": "Триллер", // genred
 					"RatingCount": 0,
 					"srcImage": ""
 				},
@@ -40,9 +40,9 @@
 					"RunTime": 90,
 					"OpeningDate": "2019-08-29T00:00:00",
 					"TitleAlt": "47 Meters Down: Uncaged ",
-					"GenreId": "0000000004",
+		    		"GenreId": "0000000004",
 					"Actors": [],
-					**"Genred": "Драма", // genred**
+			---->	"Genred": "Драма", // genred
 					"RatingCount": 0,
 					"srcImage": ""
 				},
@@ -50,7 +50,7 @@
 					"ID": "HO00000269",
 					"Title": "МАНХЕТТЕНСЬКИЙ ФЕСТИВАЛЬ КОРОТКОМЕТРАЖНИХ ФІЛЬМІВ ",
 					"RunTime": 150,
-					**"OpeningDate": "2019-09-26T00:00:00", // date**
+			---->	"OpeningDate": "2019-09-26T00:00:00", // date
 					"TitleAlt": "",
 					"GenreId": "0000000035",
 					"Actors": [],
