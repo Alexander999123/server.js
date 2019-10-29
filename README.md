@@ -71,4 +71,4 @@
 			findMovie(index)
 			edit(index, otions)
 			deleteMovie(index)
-			getByOtions(options)
+			getByOptions(options)
