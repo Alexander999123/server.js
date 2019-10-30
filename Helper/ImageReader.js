@@ -4,7 +4,7 @@ const options = {
     local: true,
     string: true
 };
-
+//hello
 function getBase64 (path){
     let prom = new Promise(resolve => { 
         base64.encode(path, options, (err, img) => {
