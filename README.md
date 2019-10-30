@@ -2,19 +2,29 @@
 *url: http://localhost:3000
 
 # Methods get:
-*1) GetAllFilms: http://localhost:3000/films - return all information about films
+## GetAllFilms: http://localhost:3000/films - return all information about films
 
-# Methods post: 
-## *1) AddFilm: 
-		URL: http://localhost:3000/films/add
-		body: Movie 
-## *2) EditFilm:
-		 URL: http://localhost:3000/films/edit
-		 body: {"id":"", options:{}}
-## *3) DeleteFilm:
-		 URL: http://localhost:3000/films/delete
-		 body: {"id"}
-## *4) GetByOptions
+# Methods post:
+## AddFilm: 
+		URL: http://localhost:3000/films/
+		body: 	
+			{
+				"movie": {
+					"ID": "55874",
+					"Title": "ІЗОЛЯЦІЯ",
+					"RunTime": 90,
+					"OpeningDate": "2019-08-22T00:00:00",
+					"TitleAlt": "Abgeschnitten ",
+					"GenreId": "0000000008",
+					"Actors": [
+						"Вася"
+					],
+					"Genred": "Триллер",
+					"RatingCount": 0,
+					"srcImage": ""
+				}
+			}
+## GetByOptions: 
 		 URL: http://localhost:3000/films/getByOptions
 		 body: {"options":{"Genred":"" or [], "OpeningDate":"" or []}}
 
@@ -59,6 +69,17 @@
 					"srcImage": ""
 				}
 			]
+			
+# Methods put:
+## EditFilm:
+		 URL: http://localhost:3000/films/
+		 body: {"id":"", options:{}}
+
+# Methods delete:
+## DeleteFilm:
+		 URL: http://localhost:3000/films/
+		 body: {"id"}
+
 
 # Models and methods 
 	*1) Movie: 
