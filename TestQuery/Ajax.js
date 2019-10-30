@@ -31,8 +31,13 @@
   const URLFILMS = "http://localhost:3000/films";
 
   var http = new XMLHttpRequest();
-  http.open("GET",URLFILMS);
-  http.send();
+  http.open("POST",URLFILMS);
+  http.setRequestHeader("Content-Type", "application/json");
+  var movie = {
+    Title:"Hello world"
+  }
+
+  http.send(JSON.stringify({movie}));
 
   http.addEventListener("load", ()=>{
       console.log(http.response);

@@ -17,9 +17,10 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(cors);
-
 app.use(bodyParser.json());
+app.use(cors());
+
+
 
 app.get('/', (req, res, next)=>{       
     res.set("Access-Control-Allow-Origin", "*");
@@ -67,6 +68,7 @@ app.delete('/', (req, res) => {
 
 app.post('/', (req, res) => {
     let movie = req.body.movie;
+    console.log(req.body)
     if(movie){
         movieList.addMovie(movie);
     
