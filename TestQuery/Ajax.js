@@ -1,29 +1,39 @@
-let res, listMovie = new MovieList;
+// let res, listMovie = new MovieList;
 
-function createCORSRequest(method, url) {
-    var xhr = new XMLHttpRequest();
+// function createCORSRequest(method, url) {
+//     var xhr = new XMLHttpRequest();
 
-    if ("withCredentials" in xhr) {
-      xhr.open(method, url, false);
-    } else if (typeof XDomainRequest != "undefined") {
-      xhr = new XDomainRequest();
-      xhr.open(method, url);
-    } else {
-      xhr = null;
-    }
+//     if ("withCredentials" in xhr) {
+//       xhr.open(method, url, false);
+//     } else if (typeof XDomainRequest != "undefined") {
+//       xhr = new XDomainRequest();
+//       xhr.open(method, url);
+//     } else {
+//       xhr = null;
+//     }
 
-    return xhr;
-  }
-  var xhr = createCORSRequest('GET', `http://localhost:3000/films`);
+//     return xhr;
+//   }
+//   var xhr = createCORSRequest('GET', `http://localhost:3000/films`);
 
-  xhr.onreadystatechange = function () {
-    if(this.readyState === 4 && this.status === 200){
-      res = this.responseText;
-    }
-  }
+//   xhr.onreadystatechange = function () {
+//     if(this.readyState === 4 && this.status === 200){
+//       res = this.responseText;
+//     }
+//   }
   
-  xhr.send();
+//   xhr.send();
   
-  listMovie.setMovieList(JSON.parse(res).list)
+//   listMovie.setMovieList(JSON.parse(res).list)
   
-  console.log(listMovie);
+//   console.log(listMovie);
+
+  const URLFILMS = "http://localhost:3000/films";
+
+  var http = new XMLHttpRequest();
+  http.open("GET",URLFILMS);
+  http.send();
+
+  http.addEventListener("load", ()=>{
+      console.log(http.response);
+  })
