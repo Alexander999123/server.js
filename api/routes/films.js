@@ -2,6 +2,7 @@ const MovieList = require('../../models/movie');
 // const GenredList = require('../../models/genred')
 const dataFilms = require('../../resources/InfoFilms.json');
 // const genredFilms = require('../../resources/FilmsGenred.json')
+const cors = require('cors');
 
 const express = require('express');
 const fs = require('fs');
@@ -15,6 +16,8 @@ movieList.setMovieList(dataFilms.list);
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use(cors);
 
 app.use(bodyParser.json());
 
