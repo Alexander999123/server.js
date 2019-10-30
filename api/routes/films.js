@@ -41,6 +41,9 @@ app.put('/', (req, res) => {
             res.send(data)
         });
     }
+    else {
+        res.send('Bad request');
+    }
 })
 
 app.delete('/', (req, res) => {
@@ -56,6 +59,9 @@ app.delete('/', (req, res) => {
             res.set("Access-Control-Allow-Origin", "*");
             res.send(data)
         })
+    }
+    else {
+        res.send('Bad request');
     }   
 })
 
@@ -69,6 +75,9 @@ app.post('/', (req, res) => {
             res.send(data)
         })
     }
+    else {
+        res.send('Bad request');
+    }
 })
 
 app.post('/getByOptions', (req, res) => {
@@ -78,6 +87,8 @@ app.post('/getByOptions', (req, res) => {
         if(foundedFilms.length > 0)
             res.status(200).json(foundedFilms);
         else res.send('Films is not defined');
+    } else {
+        res.send('Bad request');
     }
 })
 
