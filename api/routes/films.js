@@ -27,7 +27,9 @@ app.get('/', (req, res, next)=>{
 
 app.put('/', (req, res) => {
     let id = req.body.id;
-    if(id){
+    
+    console.log(req.body);
+    if(typeof id !== 'undefined'){
         let options = req.body.options;
         let r = movieList.edit(id, options)
     
