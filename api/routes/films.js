@@ -64,12 +64,14 @@ app.delete('/', (req, res) => {
     else {
         res.send('Bad request');
     }   
-})
+})  
 
 app.post('/', (req, res) => {
     let movie = req.body.movie;
     console.log(req.body)
     if(movie){
+        const id = `f${(+new Date).toString(16)}`;
+        movie.ID = id;
         movieList.addMovie(movie);
     
         writeFile().then(data=>{

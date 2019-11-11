@@ -2,7 +2,7 @@
 function Movie (options){
     this.ID = options.ID;
     this.Title = options.Title;
-    this.Description = options.Synopsis;
+    this.Description = options.Description;
     this.RunTime = options.RunTime;
     this.OpeningDate = options.OpeningDate;
     this.TitleAlt = options.TitleAlt;
@@ -10,7 +10,7 @@ function Movie (options){
     this.Actors = options.Actors;
     this.Genred = options.Genred;
     this.RatingCount =  options.RatingCount;
-    this.srcImage = "";
+    this.srcImage = options.srcImage;
 }
 
 function MovieList (){
